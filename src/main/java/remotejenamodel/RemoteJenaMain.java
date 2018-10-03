@@ -12,13 +12,13 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
 
 public class RemoteJenaMain {
 	
 	private final static String SERVER_URL = "http://localhost:8089/parliament/sparql";
-
+	
 	public static void main(String[] args) {
+		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
 
 		String queryPath = "data/query.txt";
 

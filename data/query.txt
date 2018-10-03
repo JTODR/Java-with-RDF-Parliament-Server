@@ -12,9 +12,9 @@ PREFIX osi: <http://ontologies.geohive.ie/osi#>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 
-SELECT ?area ?label ?wkt
+SELECT ?county ?label ?wkt
 WHERE {
-   ?area osi:partOf <http://data.geohive.ie/resource/county/2AE19629144F13A3E055000000000001> .
+   ?area osi:partOf ?county .
    ?area rdfs:label ?label .
    ?area geo:hasGeometry ?geometry .
    ?geometry geo:asWKT ?wkt .
