@@ -20,7 +20,7 @@ public class RemoteJenaMain {
 	public static void main(String[] args) {
 		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
 
-		String queryPath = "data/query.txt";
+		String queryPath = "query/query.txt";
 
 		final Path dataDir = Paths.get(queryPath);
 		if (!Files.isReadable(dataDir)) {
@@ -29,7 +29,8 @@ public class RemoteJenaMain {
 			System.exit(1);
 		}
 		StringBuilder query= readFile(dataDir);
-		System.out.println(query.toString());
+		//System.out.println(query.toString());
+		System.out.println("Sending query to Parliament...");
 		issueSelectQuery(query.toString());
 
 	}
@@ -38,15 +39,16 @@ public class RemoteJenaMain {
 		QueryExecution exec = QueryExecutionFactory.sparqlService(SERVER_URL, query);
 		ResultSet rs = exec.execSelect();
 		
-		String label = "";
+		String areaName = "";
 		String wkt = "";
 		
 		// print out results individually
 		while(rs.hasNext()) {
 		    QuerySolution qs = rs.next() ;
-		    label = qs.getLiteral("label").toString();
-		    wkt = qs.getLiteral("wkt").toString();
-		    System.out.println(label + " - " + wkt + "\n\n");
+		    areaName = qs.getLiteral("areaLabel").toString();
+		    wkt = qs.getLiteral("areaWkt").toString();
+		    
+		    System.out.println(areaName + " - " + wkt);
 		}
 		exec.close() ;
 	}
